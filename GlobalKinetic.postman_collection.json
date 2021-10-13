@@ -1,0 +1,164 @@
+{
+	"variables": [],
+	"info": {
+		"name": "GlobalKinetic",
+		"_postman_id": "2c77e303-999f-152e-301c-4e1d144e4005",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get London Weather And Assert Status Code",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "api.openweathermap.org/data/2.5/weather?q=London&appid={{APIKey}}",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "London",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "appid",
+							"value": "{{APIKey}}",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic bW16aXplQGdtYWlsLmNvbTpQYXNzd29yZDAwMw==",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Weather By City ID And Verify Response Body",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Verify City ID In Response Body\"] = responseBody.has(\"2172797\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "api.openweathermap.org/data/2.5/weather?id=2172797&appid={{APIKey}}",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2172797",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "appid",
+							"value": "{{APIKey}}",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get City Weather By Invalid City ID and Verify Error 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Verify Responce Code 404 For Invalid City ID 2021\"] = responseCode.code === 404;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "api.openweathermap.org/data/2.5/weather?id=2021&appid={{APIKey}}",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2021",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "appid",
+							"value": "{{APIKey}}",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
